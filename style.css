@@ -1,0 +1,57 @@
+
+body {
+  background-color: bisque;
+}
+.game-content{
+  display: flex;
+}
+header {
+  border: 1px solid black;
+  text-align: center;
+  font-size: 350%;
+  margin-bottom: 3%;
+}
+aside{
+  float: left;
+  border: 1px solid black;
+  margin-right: 1%;
+  width: 20%;
+  text-align: center;
+  font-size: 150%;
+  align-items: center;
+  padding-top: 1%;
+}
+aside div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+  height: 12%;
+  margin: 3%;
+  background-color: lightblue;
+  font-size: 80%;
+}
+main{
+  float: left;
+  border: 1px solid black;
+  width: 85%;
+  height: 60%;
+}
+
+.card-container{
+  padding: 1%;
+  display: inline-flex;
+  justify-content: center;
+  flex-flow: row wrap;
+
+}
+.card{
+  /* display: inline-block; */
+
+  height: 160px;
+  width: 150px;
+  background-color: black;
+  border: 1px solid white;
+  margin: 1px;
+}
