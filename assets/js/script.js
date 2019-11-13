@@ -3,6 +3,8 @@ var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
 var max_matches = 3;
+var attempts = 0;
+var gamesPlayed = 0;
 
 function initializeApp(){
   resetAllVariables();
@@ -12,7 +14,6 @@ function initializeApp(){
 }
 
 function handleCardClick(event){
-  //without bubbling
   var currentCard = $(event.currentTarget);
   currentCard.addClass("flip");
   currentCard.children('.front').addClass("hidden");
@@ -36,6 +37,8 @@ function checkCards(first, second){
     console.log("not a match");
     showCards();
   }
+  attempts += 1;
+  displayStats();
 }
 function showCards(){
   setTimeout(resetCards, 1200);
@@ -58,6 +61,20 @@ function winCards(){
     victoryScreen();
   }
 }
+
+function displayStats(){
+  $("#gamesPlayed").text(gamesPlayed);
+  $("#tries").text(attempts);
+  $("#accuracy").text(calculateAccuracy() + "%");
+}
+function calculateAccuracy(){
+  if (matches === null)
+  {
+    return 0;
+  }
+  return Math.floor(100*(matches/attempts));
+}
+
 function victoryScreen(){
   $('header').text("YOU WIN");
   $(".modal").css("display", "flex");
@@ -69,12 +86,12 @@ function victoryScreen(){
 
 function resetGame(){
   resetAllVariables();
-  $(".card").removeClass('flip');
-  $(".card").children('.front').removeClass("hidden");
+  var cards = $(".card");
+  cards.removeClass('flip');
+  cards.children('.front').removeClass("hidden");
   $(".modal").css("display", "none");
-  var gamesPlayed = parseInt($("#gamesPlayed").text());
   gamesPlayed += 1;
-  $("#gamesPlayed").text(gamesPlayed);
+ displayStats();
   $("header").text("Memory Match");
 }
 
@@ -82,5 +99,5 @@ function resetAllVariables(){
   matches = null;
   firstCardClicked = null;
   secondCardClicked = null;
-
+  attempts = 0;
 }
