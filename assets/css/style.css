@@ -46,6 +46,8 @@ main{
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  perspective: 600px;
 }
 .row{
   display: flex;
@@ -58,23 +60,44 @@ main{
   display: inline-flex;
   justify-content: center;
   flex-flow: row wrap;
-
 }
 .card{
-  width: 80%;
+  width: 90%;
   height: 100%;
-  background-color: black;
+
   border: 1px solid white;
   margin: 0% 1%;
-  position:relative
-}
+  position:relative;
+  background-size: cover;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  background-image: url("../images/cardback.jpg");
+  background-position: center;
 
+}
+/* .card-face{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+} */
+
+.back{
+  transform: rotateY( -180deg );
+  backface-visibility: hidden;
+
+}
+.flip{
+  transform: rotateY(180deg);
+
+}
 .back, .front , .lfz-card, .react-logo, .yugi-back, .bewd{
   background-position: center;
   background-size: cover;
-  height: 105%;
+  height: 100%;
   width: 100%;
   background-repeat: no-repeat;
+
 }
 
 .yugi-back {
@@ -84,16 +107,19 @@ main{
 
 .react-logo{
   background-image: url("../images/react-logo.png");
+
 }
 
 .docker-logo{
   background-image: url("../images/docker-logo.jpg");
+
 }
 .bewd{
   background-image: url("../images/bewdcrop.png");
 }
 .hidden{
   display: none;
+
 }
 
 .showing{

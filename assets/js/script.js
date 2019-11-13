@@ -12,6 +12,7 @@ function initializeApp(){
 function handleCardClick(event){
   // console.log(event);
   var currentCard = $(event.currentTarget);
+  currentCard.addClass("flip");
   currentCard.children('.front').addClass("hidden");
   //filling in the cardClicked
   if(firstCardClicked === null){
@@ -38,6 +39,8 @@ function showCards(){
   setTimeout(resetCards, 1200);
 }
 function resetCards(){
+  firstCardClicked.removeClass('flip');
+  secondCardClicked.removeClass('flip');
   firstCardClicked.children('.front').removeClass("hidden");
   secondCardClicked.children('.front').removeClass("hidden");
   firstCardClicked = null;
