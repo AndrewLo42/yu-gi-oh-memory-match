@@ -3,14 +3,16 @@ var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
 var max_matches = 3;
+var gamesPlayed = 0;
 function initializeApp(){
-  $(".card").on("click", function(){
+  resetAllVariables();
+  $(".card").on("click", ".front", function(){
     handleCardClick(event);
   });
 }
 
 function handleCardClick(event){
-  // console.log(event);
+  //without bubbling
   var currentCard = $(event.currentTarget);
   currentCard.addClass("flip");
   currentCard.children('.front').addClass("hidden");
@@ -27,18 +29,20 @@ function checkCards(first, second){
   var firstImg = first.find(".back").css("background-image");
   var secondImg = second.find(".back").css("background-image");
 
-  if(firstImg === secondImg){
+  if(firstImg === secondImg && first !== null){
     console.log("the cards match");
     winCards();
   } else{
     console.log("not a match");
     showCards();
+
   }
 }
 function showCards(){
   setTimeout(resetCards, 1200);
 }
 function resetCards(){
+  $(".card").on("click", ".front", handleCardClick);
   firstCardClicked.removeClass('flip');
   secondCardClicked.removeClass('flip');
   firstCardClicked.children('.front').removeClass("hidden");
@@ -48,8 +52,8 @@ function resetCards(){
 }
 function winCards(){
   matches += 1;
-  firstCardClicked.off("click");
-  secondCardClicked.off("click");
+  firstCardClicked.off("click", ".front", handleCardClick);
+  secondCardClicked.off("click", ".front", handleCardClick);
   firstCardClicked = null;
   secondCardClicked = null;
   if(matches === max_matches){
@@ -58,4 +62,27 @@ function winCards(){
 }
 function victoryScreen(){
   $('header').text("YOU WIN");
+  $(".modal").css("display", "flex");
+  // $("#again").on("click", function(){
+  //   resetAllVariables();
+  //   resetGame();
+  // });
+}
+
+function resetGame(){
+  resetAllVariables();
+  $(".card").removeClass('flip');
+  $(".card").children('.front').removeClass("hidden");
+  $(".modal").css("display", "none");
+  var currentPlayed = parseInt($("#gamesPlayed").text());
+  currentPlayed += 1;
+  $("#gamesPlayed").text(currentPlayed);
+  $("header").text("Memory Match");
+}
+
+function resetAllVariables(){
+  matches = null;
+  firstCardClicked = null;
+  secondCardClicked = null;
+
 }

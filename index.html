@@ -14,13 +14,21 @@
     <aside>
       Stats
       <div>Games Played</div>
-      <div>0</div>
+      <div id="gamesPlayed">0</div>
       <div>Attempts</div>
-      <div>0</div>
+      <div >0</div>
       <div>Accuracy</div>
       <div>0%</div>
     </aside>
     <main>
+              <!-- making a modal -->
+              <div id="winModal" class="modal">
+                <!-- content of modal -->
+                <div class="modal-content">
+                  <p>You have won. Excellent work.</p>
+                  <button id="again" onclick="resetGame()">Another?</button>
+                </div>
+              </div>
       <div class="card-container"></div>
       <div class="row">
           <div class="card">
@@ -102,6 +110,7 @@
           </div>
 
         </div>
+
     </main>
     </div>
   </body>
