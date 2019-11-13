@@ -14,22 +14,34 @@
     <aside>
       Stats
       <div>Games Played</div>
-      <div>0</div>
+      <div id="gamesPlayed">0</div>
       <div>Attempts</div>
-      <div>0</div>
+      <div >0</div>
       <div>Accuracy</div>
       <div>0%</div>
     </aside>
     <main>
+              <!-- making a modal -->
+              <div id="winModal" class="modal">
+                <!-- content of modal -->
+                <div class="modal-content">
+                  <p>You have won. Excellent work.</p>
+                  <button id="again" onclick="resetGame()">Another?</button>
+                </div>
+              </div>
       <div class="card-container"></div>
       <div class="row">
+          <div class="card">
+            <div class=" front yugi-back"></div>
+            <div class=" back react-logo"></div>
+          </div>
           <div class="card">
             <div class="front yugi-back"></div>
             <div class="back react-logo"></div>
           </div>
           <div class="card">
             <div class="front yugi-back"></div>
-            <div class="back react-logo"></div>
+            <div class="back bewd"></div>
           </div>
           <div class="card">
             <div class="front yugi-back"></div>
@@ -37,15 +49,11 @@
           </div>
           <div class="card">
             <div class="front yugi-back"></div>
-            <div class="back"></div>
+            <div class="back bewd"></div>
           </div>
           <div class="card">
             <div class="front yugi-back"></div>
-            <div class="back"></div>
-          </div>
-          <div class="card">
-            <div class="front yugi-back"></div>
-            <div class="back"></div>
+            <div class="back docker-logo"></div>
           </div>
         </div>
         <div class="row">
@@ -102,6 +110,7 @@
           </div>
 
         </div>
+
     </main>
     </div>
   </body>

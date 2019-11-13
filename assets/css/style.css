@@ -1,6 +1,13 @@
 
 body {
-  background-color: bisque;
+  background-color: black;
+  background-image: url("../images/puzzleback.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@font-face{
+  font-family: Matrix-Bold;
+  src: url(../images/Matrix-Bold.ttf);
 }
 .game-content{
   display: flex;
@@ -9,43 +16,50 @@ body {
 
 }
 header {
-  border: 1px solid black;
+  border: 1px solid bisque;
   text-align: center;
   font-size: 300%;
-  margin-bottom: 3%;
+  padding: .5%;
+  margin-bottom: 2%;
   width: 100%;
   display: flex;
   justify-content: center;
+  font-family: Matrix-Bold;
+  color: rgb(255, 60, 0);
 }
 aside{
   float: left;
-  border: 1px solid black;
+  border: 1px solid bisque;
   margin-right: 5%;
   width: 30%;
   text-align: center;
   font-size: 150%;
   align-items: center;
   padding-top: 1%;
+  color: red;
 }
 aside div {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid bisque;
   height: 12.5%;
   margin: 4%;
   background-color: lightblue;
   font-size: 80%;
+  color: black;
 }
 main{
   float: left;
-  border: 1px solid black;
+  border: 1px solid bisque;
   width: 130%;
   /* height: 100%; */
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  perspective: 600px;
 }
 .row{
   display: flex;
@@ -58,23 +72,44 @@ main{
   display: inline-flex;
   justify-content: center;
   flex-flow: row wrap;
-
 }
 .card{
-  width: 80%;
+  width: 90%;
   height: 100%;
-  background-color: black;
-  border: 1px solid white;
-  margin: 0% 1%;
-  position:relative
-}
 
-.back, .front , .lfz-card, .react-logo, .yugi-back{
+  border: 1px solid bisque;
+  margin: 0% 1%;
+  position:relative;
+  background-size: cover;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  background-image: url("../images/cardback.jpg");
+  background-position: center;
+
+}
+/* .card-face{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+} */
+
+.back{
+  transform: rotateY( -180deg );
+  backface-visibility: hidden;
+
+}
+.flip{
+  transform: rotateY(180deg);
+
+}
+.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd{
   background-position: center;
   background-size: cover;
-  height: 105%;
+  height: 100%;
   width: 100%;
   background-repeat: no-repeat;
+
 }
 
 .yugi-back {
@@ -84,15 +119,60 @@ main{
 
 .react-logo{
   background-image: url("../images/react-logo.png");
+
 }
 
 .docker-logo{
   background-image: url("../images/docker-logo.jpg");
+
+}
+.bewd{
+  background-image: url("../images/bewdcrop.png");
 }
 .hidden{
   display: none;
+
 }
 
 .showing{
-  display: block;
+  transform: rotateY(180deg);
+  /* display: block; */
+}
+
+/* Modal CSS */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background-color: pink;
+  width: 60%;
+  height: 60%;
+  justify-content: center;
+  left: 20%;
+  top: 10%;
+  border-radius: 10%;
+  background-image: url("../images/raid-exodia.jpg");
+  background-size: cover;
+
+}
+
+.modal-content{
+  background-color: bisque;
+  opacity: .9;
+  background-blend-mode: lighten;
+  border: 1px solid red;
+  margin: 15% auto;
+  padding: 20px;
+  width: 50%;
+  height: 30%;
+  border-radius: 5%;
+  color: lightblue;
+  font-size: 250%;
+  font-family: Matrix-Bold;
+}
+.modal-content > button{
+  align-content: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 5%;
 }
