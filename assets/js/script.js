@@ -2,7 +2,7 @@ $(document).ready(initializeApp);
 var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
-
+var max_matches = 3;
 function initializeApp(){
   $(".card").on("click", function(){
     handleCardClick(event);
@@ -49,4 +49,10 @@ function winCards(){
   secondCardClicked.off("click");
   firstCardClicked = null;
   secondCardClicked = null;
+  if(matches === max_matches){
+    victoryScreen();
+  }
+}
+function victoryScreen(){
+  $('header').text("YOU WIN");
 }

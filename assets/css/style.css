@@ -69,7 +69,7 @@ main{
   position:relative
 }
 
-.back, .front , .lfz-card, .react-logo, .yugi-back{
+.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd{
   background-position: center;
   background-size: cover;
   height: 105%;
@@ -89,10 +89,14 @@ main{
 .docker-logo{
   background-image: url("../images/docker-logo.jpg");
 }
+.bewd{
+  background-image: url("../images/bewdcrop.png");
+}
 .hidden{
   display: none;
 }
 
 .showing{
-  display: block;
+  transform: rotateY(180deg);
+  /* display: block; */
 }
