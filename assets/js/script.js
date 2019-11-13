@@ -3,7 +3,7 @@ var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
 var max_matches = 3;
-var gamesPlayed = 0;
+
 function initializeApp(){
   resetAllVariables();
   $(".card").on("click", ".front", function(){
@@ -35,14 +35,12 @@ function checkCards(first, second){
   } else{
     console.log("not a match");
     showCards();
-
   }
 }
 function showCards(){
   setTimeout(resetCards, 1200);
 }
 function resetCards(){
-  $(".card").on("click", ".front", handleCardClick);
   firstCardClicked.removeClass('flip');
   secondCardClicked.removeClass('flip');
   firstCardClicked.children('.front').removeClass("hidden");
@@ -74,9 +72,9 @@ function resetGame(){
   $(".card").removeClass('flip');
   $(".card").children('.front').removeClass("hidden");
   $(".modal").css("display", "none");
-  var currentPlayed = parseInt($("#gamesPlayed").text());
-  currentPlayed += 1;
-  $("#gamesPlayed").text(currentPlayed);
+  var gamesPlayed = parseInt($("#gamesPlayed").text());
+  gamesPlayed += 1;
+  $("#gamesPlayed").text(gamesPlayed);
   $("header").text("Memory Match");
 }
 
