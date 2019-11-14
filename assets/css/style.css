@@ -11,8 +11,8 @@ body {
 }
 .game-content{
   display: flex;
-  height: 105vh;
-  width: 95vw;
+  height: 90vh;
+  width: 85vw;
 
 }
 header {
@@ -68,14 +68,16 @@ main{
   width: 100%;
 
 }
-.card-container{
+/* .card-container{
   display: inline-flex;
   justify-content: center;
   flex-flow: row wrap;
-}
+  height: 100%;
+  width: 100%
+} */
 .card{
   width: 90%;
-  height: 100%;
+  height: 110%;
 
   border: 1px solid bisque;
   margin: 0% 1%;
@@ -87,12 +89,6 @@ main{
   background-position: center;
 
 }
-/* .card-face{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  backface-visibility: hidden;
-} */
 
 .back{
   transform: rotateY( -180deg );
@@ -105,6 +101,7 @@ main{
 }
 .back, .front , .lfz-card, .react-logo, .yugi-back, .bewd{
   background-position: center;
+  object-fit: contain;
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -117,27 +114,41 @@ main{
   position: absolute;
 }
 
-.react-logo{
-  background-image: url("../images/react-logo.png");
+.left-arm{
+  background-image: url("../images/leftArm.jpg");
 
 }
 
-.docker-logo{
-  background-image: url("../images/docker-logo.jpg");
+.exodia-head{
+  background-image: url("../images/exodiaHead.jpg");
 
 }
-.bewd{
-  background-image: url("../images/bewdcrop.png");
+.blue-eyes{
+  background-image: url("../images/bewd.jpg");
+}
+.right-arm{
+  background-image: url("../images/rightArm.jpg");
+}
+.right-leg{
+  background-image: url("../images/rightLeg.jpg");
+}
+.left-leg{
+  background-image: url("../images/leftLeg.jpg");
+}
+.dark-mag{
+  background-image: url("../images/darkMag.jpg");
+}
+.summoned-skull{
+  background-image: url("../images/summSkull.jpg");
+}
+.red-eyes{
+  background-image: url("../images/redEye.jpg");
 }
 .hidden{
   display: none;
 
 }
 
-.showing{
-  transform: rotateY(180deg);
-  /* display: block; */
-}
 
 /* Modal CSS */
 .modal{
