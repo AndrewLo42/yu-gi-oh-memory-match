@@ -159,6 +159,6 @@ function resetCurrentCards(){
 }
 
 function revealCards(){
-  setTimeout(endScreen("YOU HAVE BEEN BANISHED TO THE SHADOW REALM"), 5000);
   $('.card').addClass('flip');
+  setTimeout(endScreen("YOU HAVE BEEN BANISHED TO THE SHADOW REALM"), 5000);
 }
