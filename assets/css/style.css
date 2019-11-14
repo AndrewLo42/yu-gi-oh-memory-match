@@ -159,7 +159,7 @@ main{
   width: 60%;
   height: 60%;
   justify-content: center;
-  left: 20%;
+  left: 25%;
   top: 10%;
   border-radius: 10%;
   background-image: url("../images/raid-exodia.jpg");
@@ -168,12 +168,13 @@ main{
 }
 
 .modal-content{
-  background-color: bisque;
+  /* background-color: bisque; */
+  /* border: 1px solid red; */
   opacity: .9;
   background-blend-mode: lighten;
-  border: 1px solid red;
+
   margin: 15% auto;
-  padding: 20px;
+  padding: 0%;
   width: 50%;
   height: 30%;
   border-radius: 5%;

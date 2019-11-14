@@ -55,6 +55,7 @@ function addRandomBack(){
   cardBack.addClass(backClass);
   return cardBack;
 }
+
 function turnOnClick(){
   $(".card").on("click", ".front", function () {
     handleCardClick(event);
@@ -108,7 +109,7 @@ function winCards(){
   secondCardClicked.off("click", ".front", handleCardClick);
   resetCurrentCards();
   if(matches === max_matches){
-    endScreen("You win. Excelent Work.");
+    setTimeout(endScreen, 1350, "You win. Excelent job.");
   }
 }
 
@@ -160,5 +161,5 @@ function resetCurrentCards(){
 
 function revealCards(){
   $('.card').addClass('flip');
-  setTimeout(endScreen("YOU HAVE BEEN BANISHED TO THE SHADOW REALM"), 5000);
+  setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
 }
