@@ -11,17 +11,23 @@ body {
 }
 .game-content{
   display: flex;
-  height: 90vh;
-  width: 85vw;
+  height: 95vh;
+  width: 95vw;
 
 }
+.surrender{
+  width: 12%;
+  height: 20%;
+  margin-top: 16%;
+  padding: 1%;
+}
+
 header {
   border: 1px solid bisque;
-  text-align: center;
-  font-size: 300%;
+  font-size: 250%;
   padding: .5%;
   margin-bottom: 2%;
-  width: 100%;
+  width: 99%;
   display: flex;
   justify-content: center;
   font-family: Matrix-Bold;
@@ -30,8 +36,9 @@ header {
 aside{
   float: left;
   border: 1px solid bisque;
-  margin-right: 5%;
+  margin-right: 2%;
   width: 30%;
+  height: 100%;
   text-align: center;
   font-size: 150%;
   align-items: center;
@@ -54,11 +61,10 @@ main{
   float: left;
   border: 1px solid bisque;
   width: 130%;
-  /* height: 100%; */
   height: 100%;
   display: flex;
+  padding-bottom: 1%;
   flex-direction: column;
-
   perspective: 600px;
 }
 .row{
@@ -68,18 +74,11 @@ main{
   width: 100%;
 
 }
-/* .card-container{
-  display: inline-flex;
-  justify-content: center;
-  flex-flow: row wrap;
-  height: 100%;
-  width: 100%
-} */
+
 .card{
   width: 90%;
   height: 110%;
-
-  border: 1px solid bisque;
+  border: 1px solid rgba(0, 0, 0, 0.612);
   margin: 0% 1%;
   position:relative;
   background-size: cover;
@@ -87,26 +86,71 @@ main{
   transform-style: preserve-3d;
   background-image: url("../images/cardback.jpg");
   background-position: center;
+}
 
+.front:hover {
+  transition: transform .5s;
+  transform: scale(1.08);
+  box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.755);
 }
 
 .back{
   transform: rotateY( -180deg );
   backface-visibility: hidden;
-
 }
+
 .flip{
   transform: rotateY(180deg);
+}
+
+
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background-color: pink;
+  width: 70%;
+  height: 60%;
+  justify-content: center;
+  left: 15%;
+  top: 10%;
+  border-radius: 10%;
+  background-image: url("../images/raid-exodia.jpg");
+  background-size: cover;
 
 }
-.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd{
+
+.modal-content{
+  /* background-color: bisque; */
+  /* border: 1px solid red; */
+  opacity: .9;
+  background-blend-mode: lighten;
+  margin: 1% auto;
+  padding: 0%;
+  width: 100%;
+  height: 30%;
+  border-radius: 5%;
+  color: whitesmoke;
+  font-size: 250%;
+  font-family: Matrix-Bold;
+  text-align: center;
+
+}
+.modal-content > button{
+  align-content: center;
+  height: 75%;
+  width: 75%;
+  border-radius: 5%;
+}
+
+
+.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd, .light-sword{
   background-position: center;
   object-fit: contain;
   background-size: cover;
   height: 100%;
   width: 100%;
   background-repeat: no-repeat;
-
 }
 
 .yugi-back {
@@ -144,47 +188,17 @@ main{
 .red-eyes{
   background-image: url("../images/redEye.jpg");
 }
+.light-sword{
+  background-image: url("../images/swords.jpg");
+}
+.light-sword:hover{
+  transform: scale(2);
+  box-shadow: -6px 6px 3px rgba(0, 0, 0, 0.755);
+}
+.surrender:hover {
+  transition: 1s;
+  transform: rotateY(360deg);
+}
 .hidden{
   display: none;
-
-}
-
-
-/* Modal CSS */
-.modal{
-  display: none;
-  position: fixed;
-  z-index: 1;
-  background-color: pink;
-  width: 60%;
-  height: 60%;
-  justify-content: center;
-  left: 25%;
-  top: 10%;
-  border-radius: 10%;
-  background-image: url("../images/raid-exodia.jpg");
-  background-size: cover;
-
-}
-
-.modal-content{
-  /* background-color: bisque; */
-  /* border: 1px solid red; */
-  opacity: .9;
-  background-blend-mode: lighten;
-
-  margin: 15% auto;
-  padding: 0%;
-  width: 50%;
-  height: 30%;
-  border-radius: 5%;
-  color: lightblue;
-  font-size: 250%;
-  font-family: Matrix-Bold;
-}
-.modal-content > button{
-  align-content: center;
-  height: 75%;
-  width: 75%;
-  border-radius: 5%;
 }
