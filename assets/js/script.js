@@ -140,7 +140,8 @@ function resetGame(){
   $(".modal").css("display", "none");
   gamesPlayed += 1;
   displayStats();
-  $('main').empty();
+  // $('main').empty();
+  $(".row").remove();
   populatePool();
   setUpCards();
   $("header").text("Exodia Exodus");

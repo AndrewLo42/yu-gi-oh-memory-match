@@ -79,7 +79,7 @@ main{
   width: 90%;
   height: 110%;
 
-  border: 1px solid bisque;
+  border: 1px solid rgba(0, 0, 0, 0.612);
   margin: 0% 1%;
   position:relative;
   background-size: cover;
@@ -149,17 +149,15 @@ main{
 
 }
 
-
-/* Modal CSS */
 .modal{
   display: none;
   position: fixed;
   z-index: 1;
   background-color: pink;
-  width: 60%;
+  width: 70%;
   height: 60%;
   justify-content: center;
-  left: 25%;
+  left: 15%;
   top: 10%;
   border-radius: 10%;
   background-image: url("../images/raid-exodia.jpg");
@@ -173,14 +171,16 @@ main{
   opacity: .9;
   background-blend-mode: lighten;
 
-  margin: 15% auto;
+  margin: 1% auto;
   padding: 0%;
-  width: 50%;
+  width: 100%;
   height: 30%;
   border-radius: 5%;
-  color: lightblue;
+  color: whitesmoke;
   font-size: 250%;
   font-family: Matrix-Bold;
+  text-align: center;
+
 }
 .modal-content > button{
   align-content: center;
