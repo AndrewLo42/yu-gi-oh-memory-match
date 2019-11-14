@@ -23,11 +23,10 @@ var allCards = cardPool.concat(cardPool);
 function initializeApp(){
   resetAllVariables();
   setUpCards();
+  $(".light-sword").on("click", revealCards);
 }
 
 function setUpCards(){
-  // var rowIdx = 1;
-  // $(".row:eq(1)").append(createCard);
   var boardSize = {rows: 3, squares: 6}
   var board = $('main');
   for(var rowIndex = 0; rowIndex < boardSize.rows; rowIndex++){
@@ -49,7 +48,6 @@ function prepareCard(card){
 
 function addRandomBack(){
   var cardBack = $('<div>').addClass('back');
-  //random then splice
   var randomIndex = Math.floor(Math.random() * allCards.length);
   var backClass = allCards.splice(randomIndex, 1);
   cardBack.addClass(backClass);
@@ -80,7 +78,6 @@ function handleCardClick(event){
     flipCard(currentCard)
     cardClicked = true;
     checkCards(firstCardClicked, secondCardClicked);
-
   }
 }
 
@@ -140,11 +137,11 @@ function resetGame(){
   $(".modal").css("display", "none");
   gamesPlayed += 1;
   displayStats();
-  // $('main').empty();
   $(".row").remove();
   populatePool();
   setUpCards();
   $("header").text("Exodia Exodus");
+  $(".light-sword").css("display", "block");
 }
 function populatePool() {
   allCards = cardPool.concat(cardPool);
@@ -161,6 +158,9 @@ function resetCurrentCards(){
 }
 
 function revealCards(){
-  $('.card').addClass('flip');
+  var wholeBoard = $('.card');
+  $(".light-sword").css("display","none");
+  flipCard(wholeBoard);
   setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
+
 }
