@@ -8,7 +8,6 @@ var gamesPlayed = 0;
 var cardClicked = false;
 var playerTurn = true;
 
-//random?
 var cardPool = [
   "blue-eyes",
   "exodia-head",
@@ -67,29 +66,25 @@ function flipCard(currentCard){
 }
 
 function handleCardClick(event){
-  if (firstCardClicked !== null && cardClicked) {
+  if (cardClicked) {
     return;
   }
   var currentCard = $(event.currentTarget);
 
   if(playerTurn){
-
-  if(firstCardClicked === null){
-    firstCardClicked = currentCard;
-    flipCard(currentCard);
-  } else{
-    secondCardClicked = currentCard;
-    flipCard(currentCard)
-    // cardClicked = true;
-    playerTurn = false;
-    checkCards(firstCardClicked, secondCardClicked);
+    if(firstCardClicked === null){
+      firstCardClicked = currentCard;
+      flipCard(currentCard);
+    } else{
+      secondCardClicked = currentCard;
+      flipCard(currentCard)
+      // cardClicked = true;
+      playerTurn = false;
+      checkCards(firstCardClicked, secondCardClicked);
   }
-
-} else {
-
-  return;
-}
-
+  } else {
+    return;
+  }
 }
 
 function checkCards(first, second){
@@ -102,11 +97,13 @@ function checkCards(first, second){
     console.log("not a match");
     setTimeout(resetCards, 1350);
   }
+  if (!playerTurn){
+    cardClicked = true;
+  }
   if (!playerTurn && matches !== max_matches) {
+    $(".turnInfo").text("My Move");
     setTimeout(cpuTurn, 1500);
   }
-  cardClicked = true;
-
   attempts += 1;
   displayStats();
 }
@@ -118,6 +115,7 @@ function cpuTurn(){
   flipCard(secondCardClicked);
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
+  $(".turnInfo").text("Your Move");
 
 }
 
@@ -133,8 +131,9 @@ function winCards(){
     matches += 1;
     resetCurrentCards();
   } else {
-
+    cardClicked = false;
     resetCurrentCards();
+    return;
   }
 
   if(matches === max_matches){
@@ -188,7 +187,6 @@ function resetCurrentCards(){
   firstCardClicked = null;
   secondCardClicked = null;
   cardClicked = false;
-
 }
 
 function revealCards(){
