@@ -2,6 +2,7 @@ $(document).ready(initializeApp);
 var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
+var cpuMatches = null;
 var max_matches = 3;
 var attempts = 0;
 var gamesPlayed = 0;
@@ -183,6 +184,7 @@ function populatePool() {
 function resetAllVariables(){
   matches = null;
   playerTurn = true;
+  cardClicked = false;
   resetCurrentCards();
   attempts = 0;
 }
