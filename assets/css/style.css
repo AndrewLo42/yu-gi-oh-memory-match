@@ -7,7 +7,7 @@ body {
 }
 @font-face{
   font-family: Matrix-Bold;
-  src: url(../images/Matrix-Bold.ttf);
+  src: url("../fonts/Matrix-Bold.ttf");
 }
 .game-content{
   display: flex;

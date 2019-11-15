@@ -2,10 +2,11 @@ $(document).ready(initializeApp);
 var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
-var max_matches = 1;
+var max_matches = 3;
 var attempts = 0;
 var gamesPlayed = 0;
 var cardClicked = false;
+var playerTurn = true;
 
 //random?
 var cardPool = [
@@ -51,6 +52,7 @@ function addRandomBack(){
   var randomIndex = Math.floor(Math.random() * allCards.length);
   var backClass = allCards.splice(randomIndex, 1);
   cardBack.addClass(backClass);
+
   return cardBack;
 }
 
@@ -70,15 +72,24 @@ function handleCardClick(event){
   }
   var currentCard = $(event.currentTarget);
 
+  if(playerTurn){
+
   if(firstCardClicked === null){
     firstCardClicked = currentCard;
     flipCard(currentCard);
   } else{
     secondCardClicked = currentCard;
     flipCard(currentCard)
-    cardClicked = true;
+    // cardClicked = true;
+    playerTurn = false;
     checkCards(firstCardClicked, secondCardClicked);
   }
+
+} else {
+
+  return;
+}
+
 }
 
 function checkCards(first, second){
@@ -91,8 +102,23 @@ function checkCards(first, second){
     console.log("not a match");
     setTimeout(resetCards, 1350);
   }
+  if (!playerTurn && matches !== max_matches) {
+    setTimeout(cpuTurn, 1500);
+  }
+  cardClicked = true;
+
   attempts += 1;
   displayStats();
+}
+
+function cpuTurn(){
+  firstCardClicked = $(cpuPick());
+  flipCard(firstCardClicked);
+  secondCardClicked = $(cpuPick());
+  flipCard(secondCardClicked);
+  playerTurn = true;
+  checkCards(firstCardClicked, secondCardClicked);
+
 }
 
 function resetCards(){
@@ -101,10 +127,16 @@ function resetCards(){
   resetCurrentCards();
 }
 function winCards(){
-  matches += 1;
   firstCardClicked.off("click", ".front", handleCardClick);
   secondCardClicked.off("click", ".front", handleCardClick);
-  resetCurrentCards();
+  if(!playerTurn){
+    matches += 1;
+    resetCurrentCards();
+  } else {
+
+    resetCurrentCards();
+  }
+
   if(matches === max_matches){
     setTimeout(endScreen, 1350, "You win. Excelent job.");
   }
@@ -148,6 +180,7 @@ function populatePool() {
 }
 function resetAllVariables(){
   matches = null;
+  playerTurn = true;
   resetCurrentCards();
   attempts = 0;
 }
@@ -155,6 +188,7 @@ function resetCurrentCards(){
   firstCardClicked = null;
   secondCardClicked = null;
   cardClicked = false;
+
 }
 
 function revealCards(){
@@ -162,5 +196,13 @@ function revealCards(){
   $(".light-sword").css("display","none");
   flipCard(wholeBoard);
   setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
+}
 
+function cpuPick(){
+  var randomIdx = Math.floor(Math.random() * 18)
+  var cardPick = $(".card")[randomIdx];
+  if($(cardPick).hasClass("flip")){
+    return cpuPick();
+  }
+  return cardPick;
 }
