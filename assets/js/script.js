@@ -95,7 +95,7 @@ function checkCards(first, second){
     winCards();
   } else{
     console.log("not a match");
-    setTimeout(resetCards, 1350);
+    setTimeout(resetCards, 1500);
   }
   if (!playerTurn){
     cardClicked = true;
@@ -116,13 +116,15 @@ function cpuTurn(){
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
   $(".turnInfo").text("Your Move");
-
 }
 
 function resetCards(){
   firstCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   secondCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   resetCurrentCards();
+  if(playerTurn){
+    cardClicked = false;
+  }
 }
 function winCards(){
   firstCardClicked.off("click", ".front", handleCardClick);
@@ -131,8 +133,9 @@ function winCards(){
     matches += 1;
     resetCurrentCards();
   } else {
-    cardClicked = false;
     resetCurrentCards();
+    cardClicked = false;
+
     return;
   }
 
@@ -186,7 +189,7 @@ function resetAllVariables(){
 function resetCurrentCards(){
   firstCardClicked = null;
   secondCardClicked = null;
-  cardClicked = false;
+  // cardClicked = false;
 }
 
 function revealCards(){
