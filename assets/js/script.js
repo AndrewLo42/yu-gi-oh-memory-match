@@ -71,7 +71,7 @@ function handleCardClick(event){
     return;
   }
   var currentCard = $(event.currentTarget);
-
+  playSound("./assets/sounds/CARD_MOVE_2.mp3");
   if(playerTurn){
     if(firstCardClicked === null){
       firstCardClicked = currentCard;
@@ -100,23 +100,25 @@ function checkCards(first, second){
   }
   if (!playerTurn){
     cardClicked = true;
+    attempts += 1;
   }
   if (!playerTurn && matches !== max_matches) {
-    $(".turnInfo").text("My Move");
+    $(".turnInfo").text("My Move").css("color", "red");
     setTimeout(cpuTurn, 1500);
   }
-  attempts += 1;
+
   displayStats();
 }
 
 function cpuTurn(){
   firstCardClicked = $(cpuPick());
   flipCard(firstCardClicked);
+  playSound("./assets/sounds/CARD_MOVE_2.mp3");
   secondCardClicked = $(cpuPick());
   flipCard(secondCardClicked);
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
-  $(".turnInfo").text("Your Move");
+  $(".turnInfo").text("Your Move").css("color", "green");
 }
 
 function resetCards(){
@@ -127,27 +129,43 @@ function resetCards(){
     cardClicked = false;
   }
 }
+
 function winCards(){
   firstCardClicked.off("click", ".front", handleCardClick);
   secondCardClicked.off("click", ".front", handleCardClick);
   if(!playerTurn){
     matches += 1;
+    var cpuBar = $(".cpuHP");
+    hpLoss(cpuBar);
     resetCurrentCards();
   } else {
+    cpuMatches += 1;
     resetCurrentCards();
     cardClicked = false;
-
+    if (cpuMatches === max_matches) {
+      setTimeout(endScreen, 1350, "You lose, you second rate duelist.");
+    }
     return;
   }
 
   if(matches === max_matches){
     setTimeout(endScreen, 1350, "You win. Excelent job.");
+  } else if (cpuMatches === max_matches){
+    setTimeout(endScreen, 1350, "You lose, you second rate duelist.");
+  }
+
+}
+
+function hpLoss(bar){
+  bar.removeClass().addClass("lifeBar");
+  if (matches === 1){
+  bar.addClass("cpuHP-1st");
   }
 }
 
 function displayStats(){
-  $("#gamesPlayed").text(gamesPlayed);
-  $("#tries").text(attempts);
+  $("#gamesPlayed").text("Games Played: " + gamesPlayed);
+  $("#tries").text("Attempts: " + attempts);
   $("#accuracy").text(calculateAccuracy() + "%");
 }
 function calculateAccuracy(){
@@ -172,9 +190,11 @@ function resetGame(){
   $(".modal").css("display", "none");
   gamesPlayed += 1;
   displayStats();
+  playSound("./assets/sounds/sfx_shuffle.mp3");
   $(".row").remove();
   populatePool();
   setUpCards();
+
   $("header").text("Exodia Exodus");
   $(".light-sword").css("display", "block");
 }
@@ -183,6 +203,7 @@ function populatePool() {
 }
 function resetAllVariables(){
   matches = null;
+  cpuMatches = null;
   playerTurn = true;
   cardClicked = false;
   resetCurrentCards();
@@ -198,6 +219,7 @@ function revealCards(){
   var wholeBoard = $('.card');
   $(".light-sword").css("display","none");
   flipCard(wholeBoard);
+  playSound("./assets/sounds/i-totally-won-that-duel.mp3");
   setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
 }
 
@@ -208,4 +230,10 @@ function cpuPick(){
     return cpuPick();
   }
   return cardPick;
+}
+
+function playSound(soundSrc) {
+  var soundEffect = $(".sound-effects")[0];
+  $(soundEffect).attr('src', soundSrc)
+  soundEffect.play();
 }

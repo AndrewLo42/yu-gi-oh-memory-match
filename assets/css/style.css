@@ -11,8 +11,8 @@ body {
 }
 .game-content{
   display: flex;
-  height: 95vh;
-  width: 95vw;
+  height: 43vmax;
+  width: 86vmax;
 
 }
 .surrender{
@@ -57,6 +57,25 @@ aside div {
   font-size: 80%;
   color: black;
 }
+
+.turnInfo{
+  color: green;
+  font-size: 200%;
+}
+
+.cpuLife{
+  display: flex;
+}
+.lifeBar{
+  background-color: green;
+  border: 1px solid sandybrown;
+  width: 90%;
+  height: 25%;
+  transition: 500ms;
+}
+.cpuHP-1st{
+  width: 60%
+}
 main{
   float: left;
   border: 1px solid bisque;
@@ -82,14 +101,15 @@ main{
   margin: 0% 1%;
   position:relative;
   background-size: cover;
-  transition: transform 1s;
+  transition: transform .75s;
   transform-style: preserve-3d;
   background-image: url("../images/cardback.jpg");
   background-position: center;
+  border-radius: 4%;
 }
 
 .front:hover {
-  transition: transform .5s;
+  transition: transform .3s;
   transform: scale(1.08);
   box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.755);
 }
@@ -102,7 +122,6 @@ main{
 .flip{
   transform: rotateY(180deg);
 }
-
 
 .modal{
   display: none;
@@ -144,13 +163,14 @@ main{
 }
 
 
-.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd, .light-sword{
+.back, .front , .lfz-card, .react-logo, .yugi-back, .light-sword{
   background-position: center;
   object-fit: contain;
   background-size: cover;
   height: 100%;
   width: 100%;
   background-repeat: no-repeat;
+  border-radius: 4%;
 }
 
 .yugi-back {
@@ -202,3 +222,10 @@ main{
 .hidden{
   display: none;
 }
+
+/* .cpuHP, .playerHP{
+  width: 95%;
+  height: 25%;
+  background-color: greenyellow;
+  border-radius: 25px;
+} */
