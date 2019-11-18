@@ -2,12 +2,13 @@ $(document).ready(initializeApp);
 var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
-var max_matches = 1;
+var cpuMatches = null;
+var max_matches = 5;
 var attempts = 0;
 var gamesPlayed = 0;
 var cardClicked = false;
+var playerTurn = true;
 
-//random?
 var cardPool = [
   "blue-eyes",
   "exodia-head",
@@ -51,6 +52,7 @@ function addRandomBack(){
   var randomIndex = Math.floor(Math.random() * allCards.length);
   var backClass = allCards.splice(randomIndex, 1);
   cardBack.addClass(backClass);
+
   return cardBack;
 }
 
@@ -65,19 +67,24 @@ function flipCard(currentCard){
 }
 
 function handleCardClick(event){
-  if (firstCardClicked !== null && cardClicked) {
+  if (cardClicked) {
     return;
   }
   var currentCard = $(event.currentTarget);
-
-  if(firstCardClicked === null){
-    firstCardClicked = currentCard;
-    flipCard(currentCard);
-  } else{
-    secondCardClicked = currentCard;
-    flipCard(currentCard)
-    cardClicked = true;
-    checkCards(firstCardClicked, secondCardClicked);
+  playSound("./assets/sounds/CARD_MOVE_2.mp3");
+  if(playerTurn){
+    if(firstCardClicked === null){
+      firstCardClicked = currentCard;
+      flipCard(currentCard);
+    } else{
+      secondCardClicked = currentCard;
+      flipCard(currentCard)
+      // cardClicked = true;
+      playerTurn = false;
+      checkCards(firstCardClicked, secondCardClicked);
+  }
+  } else {
+    return;
   }
 }
 
@@ -89,31 +96,100 @@ function checkCards(first, second){
     winCards();
   } else{
     console.log("not a match");
-    setTimeout(resetCards, 1350);
+    setTimeout(resetCards, 1500);
   }
-  attempts += 1;
+  if (!playerTurn){
+    cardClicked = true;
+    attempts += 1;
+  }
+  if (!playerTurn && matches !== max_matches) {
+    $(".turnInfo").text("My Move").css("color", "red");
+    setTimeout(cpuTurn, 1500);
+  }
+
   displayStats();
+}
+
+function cpuTurn(){
+  firstCardClicked = $(cpuPick());
+  flipCard(firstCardClicked);
+  playSound("./assets/sounds/CARD_MOVE_2.mp3");
+  secondCardClicked = $(cpuPick());
+  flipCard(secondCardClicked);
+  playerTurn = true;
+  checkCards(firstCardClicked, secondCardClicked);
+  $(".turnInfo").text("Your Move").css("color", "goldenrod");
 }
 
 function resetCards(){
   firstCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   secondCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   resetCurrentCards();
-}
-function winCards(){
-  matches += 1;
-  firstCardClicked.off("click", ".front", handleCardClick);
-  secondCardClicked.off("click", ".front", handleCardClick);
-  resetCurrentCards();
-  if(matches === max_matches){
-    setTimeout(endScreen, 1350, "You win. Excelent job.");
+  if(playerTurn){
+    cardClicked = false;
   }
 }
 
+function winCards(){
+  firstCardClicked.off("click", ".front", handleCardClick);
+  secondCardClicked.off("click", ".front", handleCardClick);
+  if(!playerTurn){
+    matches += 1;
+    var cpuBar = $(".cpuHP");
+    hpLoss(cpuBar);
+    resetCurrentCards();
+  } else {
+    cpuMatches += 1;
+    var playerBar = $(".playerHP");
+    hpLoss(playerBar);
+    resetCurrentCards();
+    cardClicked = false;
+    if (cpuMatches === max_matches) {
+      setTimeout(endScreen, 1350, "You lose, you second rate duelist.");
+      $(".modal").css("background-image", "url('./assets/images/exodiaObliterate.gif')");
+    }
+    return;
+  }
+
+  if(matches === max_matches){
+    setTimeout(endScreen, 1350, "You win. Good job.");
+    $(".modal").css("background-image", "url('./assets/images/yugiSwag.gif')");
+  }
+
+}
+
+function hpLoss(bar){
+
+  var currentMatch;
+  if(!playerTurn){
+    currentMatch = matches;
+  } else{
+    currentMatch = cpuMatches;
+  }
+
+  if (currentMatch === 1){
+    bar.addClass("hpBar-1st");
+  } else if (currentMatch === 2){
+    bar.removeClass("hpBar-1st");
+    bar.addClass("hpBar-2nd");
+  } else if (currentMatch === 3){
+    bar.addClass("hpBar-3rd");
+  } else if (currentMatch === 4){
+    bar.addClass("hpBar-4th");
+  } else {
+    bar.addClass("hpBar-empty");
+  }
+  playSound("./assets/sounds/points_drop.mp3");
+}
+
+function resetLife(bar){
+  bar.removeClass("hpBar-1st hpBar-2nd hpBar-3rd hpBar-4th hpBar-empty");
+}
+
 function displayStats(){
-  $("#gamesPlayed").text(gamesPlayed);
-  $("#tries").text(attempts);
-  $("#accuracy").text(calculateAccuracy() + "%");
+  $("#gamesPlayed").text("Games Played: " + gamesPlayed);
+  $("#tries").text("Attempts: " + attempts);
+  $("#accuracy").text("Accuracty: " + calculateAccuracy() + "%");
 }
 function calculateAccuracy(){
   if (matches === null)
@@ -137,9 +213,12 @@ function resetGame(){
   $(".modal").css("display", "none");
   gamesPlayed += 1;
   displayStats();
+  playSound("./assets/sounds/sfx_shuffle.mp3");
   $(".row").remove();
   populatePool();
   setUpCards();
+  resetLife($(".cpuHP"));
+  resetLife($(".playerHP"));
   $("header").text("Exodia Exodus");
   $(".light-sword").css("display", "block");
 }
@@ -148,19 +227,37 @@ function populatePool() {
 }
 function resetAllVariables(){
   matches = null;
+  cpuMatches = null;
+  playerTurn = true;
+  cardClicked = false;
   resetCurrentCards();
   attempts = 0;
 }
 function resetCurrentCards(){
   firstCardClicked = null;
   secondCardClicked = null;
-  cardClicked = false;
+  // cardClicked = false;
 }
 
 function revealCards(){
   var wholeBoard = $('.card');
   $(".light-sword").css("display","none");
   flipCard(wholeBoard);
+  playSound("./assets/sounds/i-totally-won-that-duel.mp3");
   setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
+}
 
+function cpuPick(){
+  var randomIdx = Math.floor(Math.random() * 18)
+  var cardPick = $(".card")[randomIdx];
+  if($(cardPick).hasClass("flip")){
+    return cpuPick();
+  }
+  return cardPick;
+}
+
+function playSound(soundSrc) {
+  var soundEffect = $(".sound-effects")[0];
+  $(soundEffect).attr('src', soundSrc)
+  soundEffect.play();
 }

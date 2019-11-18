@@ -7,12 +7,17 @@ body {
 }
 @font-face{
   font-family: Matrix-Bold;
-  src: url(../images/Matrix-Bold.ttf);
+  src: url("../fonts/Matrix-Bold.ttf");
 }
+@font-face{
+  font-family: Midnight-Moon;
+  src: url("../fonts/Midnight-Moon.ttf");
+}
+
 .game-content{
   display: flex;
-  height: 95vh;
-  width: 95vw;
+  height: 43vmax;
+  width: 86vmax;
 
 }
 .surrender{
@@ -31,7 +36,7 @@ header {
   display: flex;
   justify-content: center;
   font-family: Matrix-Bold;
-  color: rgb(255, 60, 0);
+  color: goldenrod;
 }
 aside{
   float: left;
@@ -52,11 +57,46 @@ aside div {
   justify-content: center;
   border: 1px solid bisque;
   height: 12.5%;
-  margin: 4%;
-  background-color: lightblue;
+  margin: 8% 4%;
+  background-color: goldenrod;
   font-size: 80%;
+  font-family: Matrix-Bold;
   color: black;
 }
+
+.turnInfo{
+  color: goldenrod;
+  background-color: black;
+  font-size: 100%;
+}
+
+.cpuLife, .playerLife{
+  font-size: 60%;
+}
+.lifeBar{
+  background-color: green;
+  border: 1px solid sandybrown;
+  width: 95%;
+  height: 25%;
+  transition: 500ms;
+}
+.hpBar-1st{
+  width: 75%
+}
+.hpBar-2nd{
+  width: 55%;
+}
+.hpBar-3rd{
+  width: 30%;
+}
+.hpBar-4th{
+  width: 15%;
+  background-color: red;
+}
+.hpBar-empty{
+  width: 0%;
+}
+
 main{
   float: left;
   border: 1px solid bisque;
@@ -82,14 +122,15 @@ main{
   margin: 0% 1%;
   position:relative;
   background-size: cover;
-  transition: transform 1s;
+  transition: transform .75s;
   transform-style: preserve-3d;
   background-image: url("../images/cardback.jpg");
   background-position: center;
+  border-radius: 4%;
 }
 
 .front:hover {
-  transition: transform .5s;
+  transition: transform .3s;
   transform: scale(1.08);
   box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.755);
 }
@@ -103,7 +144,6 @@ main{
   transform: rotateY(180deg);
 }
 
-
 .modal{
   display: none;
   position: fixed;
@@ -115,14 +155,13 @@ main{
   left: 15%;
   top: 10%;
   border-radius: 10%;
-  background-image: url("../images/raid-exodia.jpg");
+  background-image: url("../images/blasted.gif");
   background-size: cover;
+  background-position: center;
 
 }
 
 .modal-content{
-  /* background-color: bisque; */
-  /* border: 1px solid red; */
   opacity: .9;
   background-blend-mode: lighten;
   margin: 1% auto;
@@ -131,7 +170,7 @@ main{
   height: 30%;
   border-radius: 5%;
   color: whitesmoke;
-  font-size: 250%;
+  font-size: 220%;
   font-family: Matrix-Bold;
   text-align: center;
 
@@ -141,16 +180,19 @@ main{
   height: 75%;
   width: 75%;
   border-radius: 5%;
+  font-family: Midnight-Moon;
+  font-size: 70%;
 }
 
 
-.back, .front , .lfz-card, .react-logo, .yugi-back, .bewd, .light-sword{
+.back, .front , .lfz-card, .react-logo, .yugi-back, .light-sword{
   background-position: center;
   object-fit: contain;
   background-size: cover;
   height: 100%;
   width: 100%;
   background-repeat: no-repeat;
+  border-radius: 4%;
 }
 
 .yugi-back {
@@ -202,3 +244,10 @@ main{
 .hidden{
   display: none;
 }
+
+/* .cpuHP, .playerHP{
+  width: 95%;
+  height: 25%;
+  background-color: greenyellow;
+  border-radius: 25px;
+} */
