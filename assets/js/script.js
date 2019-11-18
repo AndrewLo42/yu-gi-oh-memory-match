@@ -146,12 +146,14 @@ function winCards(){
     cardClicked = false;
     if (cpuMatches === max_matches) {
       setTimeout(endScreen, 1350, "You lose, you second rate duelist.");
+      $(".modal").css("background-image", "url('./assets/images/exodiaObliterate.gif')");
     }
     return;
   }
 
   if(matches === max_matches){
     setTimeout(endScreen, 1350, "You win. Good job.");
+    $(".modal").css("background-image", "url('./assets/images/yugiSwag.gif')");
   }
 
 }
