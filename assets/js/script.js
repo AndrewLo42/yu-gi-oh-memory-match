@@ -3,7 +3,7 @@ var firstCardClicked = null;
 var secondCardClicked = null;
 var matches = null;
 var cpuMatches = null;
-var max_matches = 3;
+var max_matches = 5;
 var attempts = 0;
 var gamesPlayed = 0;
 var cardClicked = false;
@@ -118,7 +118,7 @@ function cpuTurn(){
   flipCard(secondCardClicked);
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
-  $(".turnInfo").text("Your Move").css("color", "green");
+  $(".turnInfo").text("Your Move").css("color", "goldenrod");
 }
 
 function resetCards(){
@@ -140,6 +140,8 @@ function winCards(){
     resetCurrentCards();
   } else {
     cpuMatches += 1;
+    var playerBar = $(".playerHP");
+    hpLoss(playerBar);
     resetCurrentCards();
     cardClicked = false;
     if (cpuMatches === max_matches) {
@@ -149,24 +151,43 @@ function winCards(){
   }
 
   if(matches === max_matches){
-    setTimeout(endScreen, 1350, "You win. Excelent job.");
-  } else if (cpuMatches === max_matches){
-    setTimeout(endScreen, 1350, "You lose, you second rate duelist.");
+    setTimeout(endScreen, 1350, "You win. Good job.");
   }
 
 }
 
 function hpLoss(bar){
-  bar.removeClass().addClass("lifeBar");
-  if (matches === 1){
-  bar.addClass("cpuHP-1st");
+
+  var currentMatch;
+  if(!playerTurn){
+    currentMatch = matches;
+  } else{
+    currentMatch = cpuMatches;
   }
+
+  if (currentMatch === 1){
+    bar.addClass("hpBar-1st");
+  } else if (currentMatch === 2){
+    bar.removeClass("hpBar-1st");
+    bar.addClass("hpBar-2nd");
+  } else if (currentMatch === 3){
+    bar.addClass("hpBar-3rd");
+  } else if (currentMatch === 4){
+    bar.addClass("hpBar-4th");
+  } else {
+    bar.addClass("hpBar-empty");
+  }
+  playSound("./assets/sounds/points_drop.mp3");
+}
+
+function resetLife(bar){
+  bar.removeClass("hpBar-1st hpBar-2nd hpBar-3rd hpBar-4th hpBar-empty");
 }
 
 function displayStats(){
   $("#gamesPlayed").text("Games Played: " + gamesPlayed);
   $("#tries").text("Attempts: " + attempts);
-  $("#accuracy").text(calculateAccuracy() + "%");
+  $("#accuracy").text("Accuracty: " + calculateAccuracy() + "%");
 }
 function calculateAccuracy(){
   if (matches === null)
@@ -194,7 +215,8 @@ function resetGame(){
   $(".row").remove();
   populatePool();
   setUpCards();
-
+  resetLife($(".cpuHP"));
+  resetLife($(".playerHP"));
   $("header").text("Exodia Exodus");
   $(".light-sword").css("display", "block");
 }

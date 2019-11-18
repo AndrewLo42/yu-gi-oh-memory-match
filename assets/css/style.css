@@ -31,7 +31,7 @@ header {
   display: flex;
   justify-content: center;
   font-family: Matrix-Bold;
-  color: rgb(255, 60, 0);
+  color: goldenrod;
 }
 aside{
   float: left;
@@ -53,29 +53,44 @@ aside div {
   border: 1px solid bisque;
   height: 12.5%;
   margin: 4%;
-  background-color: lightblue;
+  background-color: goldenrod;
   font-size: 80%;
   color: black;
 }
 
 .turnInfo{
-  color: green;
-  font-size: 200%;
+  color: goldenrod;
+  background-color: black;
+  font-size: 100%;
 }
 
-.cpuLife{
-  display: flex;
+.cpuLife, .playerLife{
+  font-size: 60%;
 }
 .lifeBar{
   background-color: green;
   border: 1px solid sandybrown;
-  width: 90%;
+  width: 95%;
   height: 25%;
   transition: 500ms;
 }
-.cpuHP-1st{
-  width: 60%
+.hpBar-1st{
+  width: 75%
 }
+.hpBar-2nd{
+  width: 55%;
+}
+.hpBar-3rd{
+  width: 30%;
+}
+.hpBar-4th{
+  width: 15%;
+  background-color: red;
+}
+.hpBar-empty{
+  width: 0%;
+}
+
 main{
   float: left;
   border: 1px solid bisque;
@@ -134,8 +149,9 @@ main{
   left: 15%;
   top: 10%;
   border-radius: 10%;
-  background-image: url("../images/raid-exodia.jpg");
+  background-image: url("../images/blasted.gif");
   background-size: cover;
+  background-position: center;
 
 }
 
