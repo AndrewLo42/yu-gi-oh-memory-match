@@ -1,9 +1,10 @@
-
 body {
   background-color: black;
   background-image: url("../images/puzzleback.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
 }
 @font-face{
   font-family: Matrix-Bold;
@@ -16,8 +17,8 @@ body {
 
 .game-content{
   display: flex;
-  height: 43vmax;
-  width: 86vmax;
+  height: 48vmax;
+  width: 96vmax;
 
 }
 .surrender{
@@ -244,10 +245,3 @@ main{
 .hidden{
   display: none;
 }
-
-/* .cpuHP, .playerHP{
-  width: 95%;
-  height: 25%;
-  background-color: greenyellow;
-  border-radius: 25px;
-} */
