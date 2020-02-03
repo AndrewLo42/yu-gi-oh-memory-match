@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Exodia Exodus</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./assets/js/script.js"></script>
-  </head>
-  <body>
-    <header>
-      Exodia Exodus
-    </header>
-    <div class="game-content">
+
+<head>
+  <title>Exodia Exodus</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+</head>
+
+<body>
+  <header>
+    Exodia Exodus
+  </header>
+  <div class="game-content">
     <aside>
 
       <div class="turnInfo">Your Move</div>
@@ -27,20 +29,21 @@
       <div id="accuracy">Accuracy: 0%</div>
 
     </aside>
+    <div id="winModal" class="modal">
+      <div class="modal-content">
+        <p class="endText"></p>
+        <button id="again">Another?</button>
+      </div>
+    </div>
     <main>
-       <div id="winModal" class="modal">
-         <div class="modal-content">
-           <p class="endText"></p>
-             <button id="again" onclick="resetGame()">Another?</button>
-          </div>
-        </div>
     </main>
-        <div class="surrender">
-          <div class="light-sword"></div>
-        </div>
-
+    <div class="surrender">
+      <div class="light-sword"></div>
     </div>
 
+  </div>
 
-  </body>
+
+</body>
+
 </html>

@@ -21,33 +21,32 @@ var cardPool = [
   "red-eyes"];
 var allCards = cardPool.concat(cardPool);
 
-function initializeApp(){
+function initializeApp() {
   resetAllVariables();
   setUpCards();
   $(".light-sword").on("click", revealCards);
+  $("#again").on("click", resetGame)
 }
 
-function setUpCards(){
-  var boardSize = {rows: 3, squares: 6}
-  var board = $('main');
-  for(var rowIndex = 0; rowIndex < boardSize.rows; rowIndex++){
-    var gameRow = $('<div>').addClass('row');
-    for(var squareIndex = 0; squareIndex < boardSize.squares; squareIndex++){
+function setUpCards() {
+  var boardSize = { rows: 3, squares: 6 }
+  var board = $("main");
+  for (var rowIndex = 0; rowIndex < boardSize.rows; rowIndex++) {
+    for (var squareIndex = 0; squareIndex < boardSize.squares; squareIndex++) {
       var gameSquare = $('<div>').addClass('card');
-      gameRow.append(prepareCard(gameSquare));
+      board.append(prepareCard(gameSquare));
     }
-    board.append(gameRow);
   }
   turnOnClick();
 }
 
-function prepareCard(card){
+function prepareCard(card) {
   card.append("<div class='front yugi-back'></div>");
   card.append(addRandomBack());
   return card;
 }
 
-function addRandomBack(){
+function addRandomBack() {
   var cardBack = $('<div>').addClass('back');
   var randomIndex = Math.floor(Math.random() * allCards.length);
   var backClass = allCards.splice(randomIndex, 1);
@@ -56,61 +55,60 @@ function addRandomBack(){
   return cardBack;
 }
 
-function turnOnClick(){
+function turnOnClick() {
   $(".card").on("click", ".front", function () {
     handleCardClick(event);
   });
 }
-function flipCard(currentCard){
+function flipCard(currentCard) {
   currentCard.children('.front').addClass("hidden");
   currentCard.addClass("flip");
 }
 
-function handleCardClick(event){
+function handleCardClick(event) {
   if (cardClicked) {
     return;
   }
   var currentCard = $(event.currentTarget);
   playSound("./assets/sounds/CARD_MOVE_2.mp3");
-  if(playerTurn){
-    if(firstCardClicked === null){
+  if (playerTurn) {
+    if (firstCardClicked === null) {
       firstCardClicked = currentCard;
       flipCard(currentCard);
-    } else{
+    } else {
       secondCardClicked = currentCard;
       flipCard(currentCard)
-      // cardClicked = true;
       playerTurn = false;
       checkCards(firstCardClicked, secondCardClicked);
-  }
+    }
   } else {
     return;
   }
 }
 
-function checkCards(first, second){
+function checkCards(first, second) {
   var firstImg = first.find(".back").css("background-image");
   var secondImg = second.find(".back").css("background-image");
-  if(firstImg === secondImg && first !== null){
+  if (firstImg === secondImg && first !== null) {
     console.log("the cards match");
     winCards();
-  } else{
+  } else {
     console.log("not a match");
     setTimeout(resetCards, 1500);
   }
-  if (!playerTurn){
+  if (!playerTurn) {
     cardClicked = true;
     attempts += 1;
   }
   if (!playerTurn && matches !== max_matches) {
     $(".turnInfo").text("My Move").css("color", "red");
-    setTimeout(cpuTurn, 1500);
+    setTimeout(cpuTurn, 2000);
   }
 
   displayStats();
 }
 
-function cpuTurn(){
+function cpuTurn() {
   firstCardClicked = $(cpuPick());
   flipCard(firstCardClicked);
   playSound("./assets/sounds/CARD_MOVE_2.mp3");
@@ -121,19 +119,19 @@ function cpuTurn(){
   $(".turnInfo").text("Your Move").css("color", "goldenrod");
 }
 
-function resetCards(){
+function resetCards() {
   firstCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   secondCardClicked.removeClass('flip').children('.front').removeClass("hidden");
   resetCurrentCards();
-  if(playerTurn){
+  if (playerTurn) {
     cardClicked = false;
   }
 }
 
-function winCards(){
+function winCards() {
   firstCardClicked.off("click", ".front", handleCardClick);
   secondCardClicked.off("click", ".front", handleCardClick);
-  if(!playerTurn){
+  if (!playerTurn) {
     matches += 1;
     var cpuBar = $(".cpuHP");
     hpLoss(cpuBar);
@@ -151,30 +149,30 @@ function winCards(){
     return;
   }
 
-  if(matches === max_matches){
+  if (matches === max_matches) {
     setTimeout(endScreen, 1350, "You win. Good job.");
     $(".modal").css("background-image", "url('./assets/images/yugiSwag.gif')");
   }
 
 }
 
-function hpLoss(bar){
+function hpLoss(bar) {
 
   var currentMatch;
-  if(!playerTurn){
+  if (!playerTurn) {
     currentMatch = matches;
-  } else{
+  } else {
     currentMatch = cpuMatches;
   }
 
-  if (currentMatch === 1){
+  if (currentMatch === 1) {
     bar.addClass("hpBar-1st");
-  } else if (currentMatch === 2){
+  } else if (currentMatch === 2) {
     bar.removeClass("hpBar-1st");
     bar.addClass("hpBar-2nd");
-  } else if (currentMatch === 3){
+  } else if (currentMatch === 3) {
     bar.addClass("hpBar-3rd");
-  } else if (currentMatch === 4){
+  } else if (currentMatch === 4) {
     bar.addClass("hpBar-4th");
   } else {
     bar.addClass("hpBar-empty");
@@ -182,30 +180,29 @@ function hpLoss(bar){
   playSound("./assets/sounds/points_drop.mp3");
 }
 
-function resetLife(bar){
+function resetLife(bar) {
   bar.removeClass("hpBar-1st hpBar-2nd hpBar-3rd hpBar-4th hpBar-empty");
 }
 
-function displayStats(){
+function displayStats() {
   $("#gamesPlayed").text("Games Played: " + gamesPlayed);
   $("#tries").text("Attempts: " + attempts);
   $("#accuracy").text("Accuracty: " + calculateAccuracy() + "%");
 }
-function calculateAccuracy(){
-  if (matches === null)
-  {
+function calculateAccuracy() {
+  if (matches === null) {
     return 0;
   }
-  return Math.floor(100*(matches/attempts));
+  return Math.floor(100 * (matches / attempts));
 }
 
-function endScreen(displayText){
+function endScreen(displayText) {
   $('header').text("SENT TO THE SHADOW REALM");
   $(".modal").css("display", "flex");
   $(".endText").text(displayText);
 }
 
-function resetGame(){
+function resetGame() {
   resetAllVariables();
   var cards = $(".card");
   cards.removeClass('flip');
@@ -214,7 +211,7 @@ function resetGame(){
   gamesPlayed += 1;
   displayStats();
   playSound("./assets/sounds/sfx_shuffle.mp3");
-  $(".row").remove();
+  $("main").empty();
   populatePool();
   setUpCards();
   resetLife($(".cpuHP"));
@@ -225,7 +222,7 @@ function resetGame(){
 function populatePool() {
   allCards = cardPool.concat(cardPool);
 }
-function resetAllVariables(){
+function resetAllVariables() {
   matches = null;
   cpuMatches = null;
   playerTurn = true;
@@ -233,24 +230,23 @@ function resetAllVariables(){
   resetCurrentCards();
   attempts = 0;
 }
-function resetCurrentCards(){
+function resetCurrentCards() {
   firstCardClicked = null;
   secondCardClicked = null;
-  // cardClicked = false;
 }
 
-function revealCards(){
+function revealCards() {
   var wholeBoard = $('.card');
-  $(".light-sword").css("display","none");
+  $(".light-sword").css("display", "none");
   flipCard(wholeBoard);
   playSound("./assets/sounds/i-totally-won-that-duel.mp3");
-  setTimeout(endScreen, 2000, "YOU HAVE BEEN BANISHED TO THE SHADOW REALM");
+  setTimeout(endScreen, 2000, "BANISHED TO THE SHADOW REALM");
 }
 
-function cpuPick(){
+function cpuPick() {
   var randomIdx = Math.floor(Math.random() * 18)
   var cardPick = $(".card")[randomIdx];
-  if($(cardPick).hasClass("flip")){
+  if ($(cardPick).hasClass("flip")) {
     return cpuPick();
   }
   return cardPick;
