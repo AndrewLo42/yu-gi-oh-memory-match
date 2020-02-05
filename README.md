@@ -10,7 +10,7 @@ Users have to match 5 pairs before the Computer player!
 - CSS3
 
 # Live Demo
-Link: 
+Link: http://exodia-exodus.andrewclo.com/
 
 # Features
 - Users can click on image cards to begin the memory matching process
