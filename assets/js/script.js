@@ -8,6 +8,7 @@ var attempts = 0;
 var gamesPlayed = 0;
 var cardClicked = false;
 var playerTurn = true;
+var soundEffects = false;
 
 var cardPool = [
   "blue-eyes",
@@ -24,8 +25,28 @@ var allCards = cardPool.concat(cardPool);
 function initializeApp() {
   resetAllVariables();
   setUpCards();
+  $(".turnInfo").on("click", showConcede);
   $(".light-sword").on("click", revealCards);
-  $("#again").on("click", resetGame)
+  $(".again").on("click", resetGame);
+  $("#start").on("click", startGame);
+  $(".volumeToggle").on("click", toggleVolume);
+}
+
+function showConcede() {
+  $(".light-sword").toggleClass("hidden");
+}
+
+function startGame(){
+  $(".openingBack").css("display", "none");
+}
+
+function toggleVolume() {
+  soundEffects = !soundEffects;
+  if(soundEffects){
+    $(".volumeToggle").css("color", "green");
+  } else {
+    $(".volumeToggle").css("color", "red");
+  }
 }
 
 function setUpCards() {
@@ -90,10 +111,8 @@ function checkCards(first, second) {
   var firstImg = first.find(".back").css("background-image");
   var secondImg = second.find(".back").css("background-image");
   if (firstImg === secondImg && first !== null) {
-    console.log("the cards match");
     winCards();
   } else {
-    console.log("not a match");
     setTimeout(resetCards, 1500);
   }
   if (!playerTurn) {
@@ -102,7 +121,7 @@ function checkCards(first, second) {
   }
   if (!playerTurn && matches !== max_matches) {
     $(".turnInfo").text("My Move").css("color", "red");
-    setTimeout(cpuTurn, 2000);
+    setTimeout(cpuTurn, 3000);
   }
 
   displayStats();
@@ -114,6 +133,9 @@ function cpuTurn() {
   playSound("./assets/sounds/CARD_MOVE_2.mp3");
   secondCardClicked = $(cpuPick());
   flipCard(secondCardClicked);
+  setTimeout(cpuTurnEnd, 2000);
+}
+function cpuTurnEnd() {
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
   $(".turnInfo").text("Your Move").css("color", "goldenrod");
@@ -188,6 +210,7 @@ function displayStats() {
   $("#gamesPlayed").text("Games Played: " + gamesPlayed);
   $("#tries").text("Attempts: " + attempts);
   $("#accuracy").text("Accuracty: " + calculateAccuracy() + "%");
+  matches ? $(".matches").text("Matches: " + matches) : $(".playerHP").text("Matches: " + 0);
 }
 function calculateAccuracy() {
   if (matches === null) {
@@ -198,7 +221,7 @@ function calculateAccuracy() {
 
 function endScreen(displayText) {
   $('header').text("SENT TO THE SHADOW REALM");
-  $(".modal").css("display", "flex");
+  $("#winModal").css("display", "flex");
   $(".endText").text(displayText);
 }
 
@@ -207,7 +230,7 @@ function resetGame() {
   var cards = $(".card");
   cards.removeClass('flip');
   cards.children('.front').removeClass("hidden");
-  $(".modal").css("display", "none");
+  $("#winModal").css("display", "none");
   gamesPlayed += 1;
   displayStats();
   playSound("./assets/sounds/sfx_shuffle.mp3");
@@ -217,7 +240,7 @@ function resetGame() {
   resetLife($(".cpuHP"));
   resetLife($(".playerHP"));
   $("header").text("Exodia Exodus");
-  $(".light-sword").css("display", "block");
+  $(".light-sword").addClass("hidden");
 }
 function populatePool() {
   allCards = cardPool.concat(cardPool);
@@ -237,7 +260,7 @@ function resetCurrentCards() {
 
 function revealCards() {
   var wholeBoard = $('.card');
-  $(".light-sword").css("display", "none");
+  $(".light-sword").toggleClass("hidden");
   flipCard(wholeBoard);
   playSound("./assets/sounds/i-totally-won-that-duel.mp3");
   setTimeout(endScreen, 2000, "BANISHED TO THE SHADOW REALM");
@@ -253,7 +276,9 @@ function cpuPick() {
 }
 
 function playSound(soundSrc) {
-  var soundEffect = $(".sound-effects")[0];
-  $(soundEffect).attr('src', soundSrc)
-  soundEffect.play();
+  if(soundEffects) {
+    var soundEffect = $(".sound-effects")[0];
+    $(soundEffect).attr('src', soundSrc)
+    soundEffect.play();
+  }
 }

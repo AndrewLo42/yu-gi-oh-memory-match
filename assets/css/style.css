@@ -22,12 +22,6 @@ body {
   width: 98vw;
 
 }
-.surrender{
-  width: 12%;
-  height: 20%;
-  margin-top: 16%;
-  padding: 1%;
-}
 
 header {
   border: 1px solid bisque;
@@ -124,6 +118,7 @@ main{
 .front:hover {
   transition: transform .3s;
   transform: scale(1.08);
+  cursor: pointer;
 }
 
 
@@ -136,11 +131,44 @@ main{
   transform: rotateY(180deg);
 }
 
-.modal{
+
+#winModal {
   display: none;
+  flex-direction: column;
+  text-align: center;
+}
+#openingModal {
+  display: flex;
+  flex-direction: column;
+  background-image: none;
+  color: black;
+  text-align: center;
+}
+
+.modalFooter,
+.modalTitle {
+  font-family: Midnight-Moon;
+  font-size: 2rem;
+}
+
+.volumeToggle:hover,
+.light-sword:hover,
+#start:hover,
+.again:hover {
+  cursor: pointer;
+}
+
+.modalFooter {
+  background-color: white;
+  padding: 1%;
+  width: 25%;
+  margin: auto;
+  border-radius: 5px;
+}
+.modal{
   position: fixed;
   z-index: 1;
-  background-color: pink;
+  background-color: goldenrod;
   width: 70%;
   height: 60%;
   justify-content: center;
@@ -153,21 +181,31 @@ main{
 
 }
 
-.modal-content{
+.openingBack {
+  background-color: black;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  right: 0;
+}
+
+.modalContent{
   opacity: .9;
   background-blend-mode: lighten;
   margin: 1% auto;
   padding: 0%;
   width: 100%;
   height: 30%;
-  border-radius: 5%;
+  border-radius: 5px;
   color: purple;
   font-size: 220%;
   font-family: Matrix-Bold;
   text-align: center;
 
 }
-.modal-content > button{
+
+.modalContent > button{
   align-content: center;
   height: 75%;
   width: 75%;
@@ -175,7 +213,6 @@ main{
   font-family: Midnight-Moon;
   font-size: 70%;
 }
-
 
 .back, .front , .lfz-card, .react-logo, .yugi-back, .light-sword{
   background-position: center;
@@ -225,15 +262,44 @@ main{
 .light-sword{
   background-image: url("../images/swords.jpg");
 }
-.light-sword:hover{
-  transform: scale(2);
-}
-.surrender:hover {
+.turnInfo:hover {
   transition: 1s;
   transform: rotateY(360deg);
+  cursor: pointer;
 }
+
 .hidden{
   display: none;
+}
+
+.matches {
+  border: none;
+  background-color: transparent;
+}
+
+.volumeToggle {
+  color: red;
+  position: absolute;
+  font-size: 1.5rem;
+  margin: auto;
+}
+
+.showConcede {
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  background-color: goldenrod;
+  transition: .5s ease-in-out;
+  position: absolute;
+  right: -100px;
+  animation: slide 0.4s forwards;
+  width: 20%;
+  z-index: 10;
+  opacity: 90%;
+}
+
+@keyframes slide {
+    100% { right: 0; }
 }
 
 @media only screen and (max-device-width: 1460px) and (orientation: portrait),
@@ -265,12 +331,12 @@ main{
     justify-content: space-evenly;
     align-content: space-evenly;
     margin: 1%;
-    font-size: 2em;
+    font-size: 1rem;
     padding: 1%;
   }
 
   .playerLife, .cpuLife{
-    font-size: 1.5em;
+    font-size: .6rem;
   }
 
   main{
@@ -278,53 +344,126 @@ main{
     height: 70vh;
   }
 
-  .surrender{
-    margin-top: 0%;
-  }
-
-
 }
 
 @media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
     * {
-        font-size: 1em;
+      font-size: 1em;
+    }
+
+}
+
+
+@media only screen and (min-width: 1024px) and (max-height: 786px)  {
+    main {
+      width: 80%
+    }
+
+    aside {
+      width: 15%;
+      font-size: 1.2rem;
+    }
+    .modalTitle {
+      font-size: 4rem;
     }
 }
 
 @media only screen and (max-device-width: 414px) and (orientation: portrait),
-(max-device-width: 823px) and (orientation: landscape),
+(max-device-width: 823px),
 (max-width: 950px) and (orientation: landscape) {
-    aside {
-      font-size: 15px;
+    aside div{
+      font-size: 2rem;
+    }
+    .playerLife,
+    .cpuLife,
+    .matches{
+      font-size: 1.3rem;
     }
     .card {
       height: 20%;
     }
     .modal {
-      height: 50%;
+      height: 65%;
+      font-size: 2rem;
     }
-    .modal-content {
-      margin-top: 50%;
-      font-size: 40px;
+    .modalTitle {
+      padding-top: 2%;
+      font-size: 4rem;
     }
-    .modal-content > button {
-      font-size: 40px;
+    #start {
+      height: 25%;
+      margin-top: 60%;
     }
-    .surrender{
-      width: 20%;
+    .game-content {
+      width: 96vw;
     }
+    .modalFooter {
+      font-size: 4rem;
+    }
+}
+
+@media only screen and (max-device-width: 812px) and (orientation: landscape),
+(max-width: 375px) {
+  .modalTitle {
+    font-size: 2rem;
+  }
+  .modal {
+    margin-top: 2%;
+    font-size: .8rem;
+  }
+  .modalContent {
+    height: 70%;
+  }
+  #start {
+    height: 20%;
+    margin-top: 25%;
+    margin-bottom: 5%;
+  }
+  aside div{
+    font-size: 1.2rem;
+  }
+  .playerLife,
+  .cpuLife,
+  .matches{
+    font-size: 1.2rem;
+  }
 }
 
 @media only screen and
 (max-device-width: 823px) and (orientation: landscape),
 (max-width: 950px) and (orientation: landscape) {
   .card {
-    margin: -30px -2px;
+    margin: -30px -1.9px;
     height: 25%;
   }
-  .surrender {
-    height: 30%;
-    margin-top: 15%;
+
+  aside {
+    height: 79vh;
+    width: 15%;
+    font-size: .9rem;
+  }
+
+  aside div {
+    margin: 6% 4%;
+  }
+
+  .matches,
+  .playerLife,
+  .cpuLife {
+    padding-top: .2rem;
+  }
+
+  main {
+    width: 85%;
+    height: 79vh;
+  }
+
+  .game-content {
+    width: 98vw;
+  }
+
+  #start {
+    margin-top: 5%;
   }
 
 }
@@ -333,7 +472,7 @@ main{
 @media only screen and (max-device-width: 568px) and (orientation: landscape),
 (max-width: 700px) {
     aside {
-      font-size: 5px;
+      font-size: .4rem;
     }
     .modal {
       font-size: 10px;
