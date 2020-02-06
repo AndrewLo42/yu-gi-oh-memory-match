@@ -4,46 +4,61 @@
 <head>
   <title>Exodia Exodus</title>
   <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://kit.fontawesome.com/6b70c3be0e.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </head>
-
 <body>
   <header>
     Exodia Exodus
   </header>
+  <div class="openingBack">
+      <div id="openingModal" class="modal">
+        <div class="modalTitle">
+          Welcome to the Shadow Realm.
+        </div>
+
+        <div class="modalContent">
+          <p class="endText">
+            Play against me to escape, or forever be banished. <br>
+            To win, get 5 pairs before I get 5 pairs. <br>
+            You can concede, if you are too weak using the "move notification" box. <br>
+          </p>
+        </div>
+        <button id="start" class="modalContent">Start</button>
+      </div>
+  </div>
+
+  <div class="">
+    <div class="light-sword hidden showConcede">Concede?</div>
+  </div>
   <div class="game-content">
     <aside>
-
-      <div class="turnInfo">Your Move</div>
+      <div class="turnInfo">
+        Your Move
+      </div>
       <audio class="sound-effects"></audio>
       <div id="gamesPlayed">Games Played: 0</div>
-      <div class="cpuLife">Opponent's Life Points
+      <div class="cpuLife">My Life
         <div class="cpuHP lifeBar"></div>
       </div>
-      <div class="playerLife">Player's Life Points
-        <div class="playerHP lifeBar"></div>
+      <div class="playerLife">Your Life
+        <div class="playerHP lifeBar"><div class="matches">Matches: 0</div></div>
       </div>
       <div id="tries">Attempts: 0</div>
-
       <div id="accuracy">Accuracy: 0%</div>
-
     </aside>
+    <i class="fas fa-volume-off volumeToggle"></i>
+
     <div id="winModal" class="modal">
-      <div class="modal-content">
-        <p class="endText"></p>
-        <button id="again">Another?</button>
+      <div class="modalContent">
       </div>
+      <button id="again" class=" again endText modalContent"></button>
+      <div class="again modalFooter">Another?</div>
     </div>
     <main>
     </main>
-    <div class="surrender">
-      <div class="light-sword"></div>
-    </div>
-
   </div>
-
-
 </body>
 
 </html>
