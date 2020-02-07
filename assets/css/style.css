@@ -108,7 +108,7 @@ main{
   height: 30%;
   position:relative;
   background-size: contain;
-  transition: transform .75s;
+  transition: transform .6s;
   transform-style: preserve-3d;
   background-position: center;
   border-radius: 4%;
@@ -117,7 +117,7 @@ main{
 }
 
 .front:hover {
-  transition: transform .3s;
+  transition: transform .25s;
   transform: scale(1.08);
   cursor: pointer;
 }
@@ -148,7 +148,7 @@ main{
 .modalFooter,
 .modalTitle {
   font-family: Midnight-Moon;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 
 .volumeToggle:hover,
@@ -174,7 +174,7 @@ main{
 .modal{
   position: fixed;
   z-index: 1;
-  background-color: goldenrod;
+  background-color: rgb(199, 186, 153);
   width: 70%;
   height: 60%;
   justify-content: center;
@@ -199,13 +199,13 @@ main{
 .modalContent{
   opacity: .9;
   background-blend-mode: lighten;
-  margin: 1% auto;
+  margin: .1% auto;
   padding: 0%;
   width: 100%;
   height: 30%;
   border-radius: 5px;
   color: purple;
-  font-size: 220%;
+  font-size: 2.2rem;
   font-family: Matrix-Bold;
   text-align: center;
 
@@ -269,8 +269,7 @@ main{
   background-image: url("../images/swords.jpg");
 }
 .turnInfo:hover {
-  transition: 1s;
-  transform: rotateY(360deg);
+  transition: .5s;
   cursor: pointer;
 }
 
@@ -375,7 +374,7 @@ main{
       font-size: 1.2rem;
     }
     .modalTitle {
-      font-size: 4rem;
+      font-size: 3.5rem;
     }
 }
 
@@ -383,12 +382,14 @@ main{
 (max-device-width: 823px),
 (max-width: 950px) and (orientation: landscape) {
     aside div{
-      font-size: 2rem;
+      font-size: 1.4rem;
     }
     .playerLife,
-    .cpuLife,
-    .matches{
+    .cpuLife{
       font-size: 1.3rem;
+    }
+    .matches{
+      display: none;
     }
     .card {
       height: 20%;
@@ -399,11 +400,14 @@ main{
     }
     .modalTitle {
       padding-top: 5%;
-      font-size: 4rem;
+      font-size: 3rem;
+    }
+    .modalContent {
+      font-size: 3rem;
     }
     #start {
-      height: 25%;
-      margin-top: 60%;
+      height: 20%;
+      margin-top: 40%;
     }
     .game-content {
       width: 96vw;
@@ -417,13 +421,15 @@ main{
 (max-width: 375px) {
   .modalTitle {
     font-size: 2rem;
+    display: none;
   }
   .modal {
     margin-top: 2%;
     font-size: .8rem;
   }
   .modalContent {
-    height: 70%;
+    font-size: 2rem;
+    height: 65%;
   }
   #start {
     height: 20%;
@@ -431,12 +437,14 @@ main{
     margin-bottom: 5%;
   }
   aside div{
-    font-size: 1.2rem;
+    font-size: .8rem;
   }
   .playerLife,
-  .cpuLife,
+  .cpuLife{
+    font-size: .5rem;
+  }
   .matches{
-    font-size: 1.1rem;
+     display: none;
   }
 }
 
@@ -444,7 +452,7 @@ main{
 (max-device-width: 823px) and (orientation: landscape),
 (max-width: 950px) and (orientation: landscape) {
   .card {
-    margin: -30px -1.9px;
+    margin: -30px -1.3px;
     height: 25%;
   }
 
@@ -455,6 +463,7 @@ main{
   }
 
   aside div {
+    font-size: 1.2rem;
     margin: 6% 4%;
   }
 
@@ -462,6 +471,7 @@ main{
   .playerLife,
   .cpuLife {
     padding-top: .2rem;
+    font-size:1.2rem;
   }
 
   main {
@@ -474,7 +484,7 @@ main{
   }
 
   #start {
-    margin-top: 5%;
+    margin-top: 15%;
   }
 
 }
