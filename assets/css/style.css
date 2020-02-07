@@ -105,8 +105,8 @@ main{
 
 .card{
   width: 15%;
-  height: 30%;
-  position:relative;
+  height: 28%;
+  position: relative;
   background-size: contain;
   transition: transform .6s;
   transform-style: preserve-3d;
@@ -285,7 +285,8 @@ main{
 .volumeToggle {
   color: red;
   /* position: absolute; */
-  font-size: 1.5rem;
+  font-size: 4rem;
+  padding-right: 1.1rem;
   margin: auto;
   float: right;
 }

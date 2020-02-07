@@ -113,32 +113,31 @@ function checkCards(first, second) {
   if (firstImg === secondImg && first !== null) {
     winCards();
   } else {
-    setTimeout(resetCards, 1500);
+    setTimeout(resetCards, 2000);
   }
   if (!playerTurn) {
     cardClicked = true;
     attempts += 1;
   }
   if (!playerTurn && matches !== max_matches) {
-    $(".turnInfo").text("My Move").css("color", "red");
-    setTimeout(cpuTurn, 3000);
+    setTimeout(cpuTurn, 2000);
   }
 
   displayStats();
 }
 
 function cpuTurn() {
+  $(".turnInfo").text("My Move").css("color", "red");
   firstCardClicked = $(cpuPick());
   flipCard(firstCardClicked);
   playSound("./assets/sounds/CARD_MOVE_2.mp3");
   secondCardClicked = $(cpuPick());
   flipCard(secondCardClicked);
-  setTimeout(cpuTurnEnd, 2000);
+  setTimeout(cpuTurnEnd, 1500);
 }
 function cpuTurnEnd() {
   playerTurn = true;
   checkCards(firstCardClicked, secondCardClicked);
-  $(".turnInfo").text("Your Move").css("color", "goldenrod");
 }
 
 function resetCards() {
@@ -210,7 +209,7 @@ function displayStats() {
   $("#gamesPlayed").text("Games Played: " + gamesPlayed);
   $("#tries").text("Attempts: " + attempts);
   $("#accuracy").text("Accuracty: " + calculateAccuracy() + "%");
-  matches ? $(".matches").text("Matches: " + matches) : $(".playerHP").text("Matches: " + 0);
+  matches ? $(".matches").text("Matches: " + matches) : $(".matches").text("Matches: " + 0);
 }
 function calculateAccuracy() {
   if (matches === null) {
@@ -254,6 +253,9 @@ function resetAllVariables() {
   attempts = 0;
 }
 function resetCurrentCards() {
+  if(playerTurn){
+    $(".turnInfo").text("Your Move").css("color", "goldenrod");
+  }
   firstCardClicked = null;
   secondCardClicked = null;
 }
