@@ -33,7 +33,7 @@ function initializeApp() {
 }
 
 function showConcede() {
-  $(".light-sword").toggleClass("hidden");
+  $(".showConcede").toggleClass("hidden");
 }
 
 function startGame(){
@@ -43,8 +43,10 @@ function startGame(){
 function toggleVolume() {
   soundEffects = !soundEffects;
   if(soundEffects){
+    $(".soundText").text("Sound: On");
     $(".volumeToggle").css("color", "green");
   } else {
+    $(".soundText").text("Sound: Off")
     $(".volumeToggle").css("color", "red");
   }
 }
@@ -239,7 +241,7 @@ function resetGame() {
   resetLife($(".cpuHP"));
   resetLife($(".playerHP"));
   $("header").text("Exodia Exodus");
-  $(".light-sword").addClass("hidden");
+  $(".showConcede").addClass("hidden");
 }
 function populatePool() {
   allCards = cardPool.concat(cardPool);
@@ -262,7 +264,7 @@ function resetCurrentCards() {
 
 function revealCards() {
   var wholeBoard = $('.card');
-  $(".light-sword").toggleClass("hidden");
+  $(".showConcede").toggleClass("hidden");
   flipCard(wholeBoard);
   playSound("./assets/sounds/i-totally-won-that-duel.mp3");
   setTimeout(endScreen, 2000, "BANISHED TO THE SHADOW REALM");

@@ -220,7 +220,7 @@ main{
   font-size: 70%;
 }
 
-.back, .front , .lfz-card, .react-logo, .yugi-back, .light-sword{
+.back, .front , .lfz-card, .react-logo, .yugi-back{
   background-position: center;
   object-fit: contain;
   background-size: contain;
@@ -228,6 +228,17 @@ main{
   width: 100%;
   background-repeat: no-repeat;
   border-radius: 4%;
+}
+
+.light-sword {
+  background-position: center;
+  object-fit: contain;
+  background-size: contain;
+  height: 50%;
+  width: 80%;
+  background-repeat: no-repeat;
+  border-radius: 4%;
+  margin: auto;
 }
 
 .yugi-back {
@@ -274,6 +285,7 @@ main{
 }
 
 .hidden{
+  animation: fadeout 0.4s forwards;
   display: none;
 }
 
@@ -282,13 +294,26 @@ main{
   background-color: transparent;
 }
 
+.concedeContainer {
+  padding-top: 2rem;
+}
+
+.soundText {
+  color: black;
+  font-size: 2rem;
+}
+
 .volumeToggle {
   color: red;
-  /* position: absolute; */
-  font-size: 4rem;
+  text-align: center;
+  font-size: 3rem;
   padding-right: 1.1rem;
   margin: auto;
   float: right;
+}
+.volumeContainer {
+  display: flex;
+  width: 100%;
 }
 
 .showConcede {
@@ -298,16 +323,24 @@ main{
   background-color: goldenrod;
   transition: .5s ease-in-out;
   position: absolute;
-  right: -100px;
-  animation: slide 0.4s forwards;
+  right: 2px;
+  animation: fadein 0.4s forwards;
   width: 20%;
   z-index: 10;
   opacity: 90%;
+  height: 82%;
 }
 
-@keyframes slide {
-    100% { right: 0; }
+@keyframes fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 90%; }
 }
+
+@keyframes fadeout {
+  0%   { opacity: 90%; }
+  100% { opacity: 0; }
+}
+
 
 @media only screen and (max-device-width: 1460px) and (orientation: portrait),
 (max-width: 560px){
@@ -437,6 +470,9 @@ main{
     margin-top: 25%;
     margin-bottom: 5%;
   }
+  .endText {
+    padding-top: 15px;
+  }
   aside div{
     font-size: .8rem;
   }
@@ -446,6 +482,10 @@ main{
   }
   .matches{
      display: none;
+  }
+  .light-sword {
+    margin-top: 30%;
+    height: 20%;
   }
 }
 
