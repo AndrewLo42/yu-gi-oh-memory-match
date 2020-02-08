@@ -21,18 +21,26 @@
 
         <div class="modalContent">
           <p class="endText">
-            Play against me to escape, or forever be banished. <br>
+            Play against me to escape, or forever be banished. <br> <br>
             To win, get 5 pairs before I get 5 pairs. <br> <br>
-            You can concede, if you are too weak using the "move notification" box. <br>
+            Use the "move notification" box for options. <br>
           </p>
         </div>
         <button id="start" class="modalContent">Start</button>
       </div>
   </div>
 
-  <div class="">
-    <div class="light-sword hidden showConcede">Concede?</div>
+  <div class="showConcede hidden">
+    <div class="concedeContainer">
+      <div>Menu:</div>
+      <div class="soundText">Sound</div>
+      <div class="volumeContainer">
+        <i class="fas fa-volume-off volumeToggle"></i>
+      </div>
+    </div>
+    <div class="light-sword"></div>
   </div>
+
   <div class="game-content">
     <aside>
       <div class="turnInfo">
@@ -49,10 +57,7 @@
       <div id="tries">Attempts: 0</div>
       <div id="accuracy">Accuracy: 0%</div>
 
-
-
     </aside>
-    <i class="fas fa-volume-off volumeToggle"></i>
     <div id="winModal" class="modal">
       <div class="modalContent">
       </div>
