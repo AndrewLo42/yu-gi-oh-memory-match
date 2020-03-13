@@ -109,6 +109,8 @@ main{
   position: relative;
   background-size: contain;
   transition: transform .6s;
+  -webkit-transition: transform .6s;
+  -moz-transition: transform .6s;
   transform-style: preserve-3d;
   background-position: center;
   border-radius: 4%;
@@ -118,17 +120,25 @@ main{
 
 .front:hover {
   transition: transform .25s;
+  -webkit-transition: transform .25s;
+  -moz-transition: transform .25s;
   transform: scale(1.08);
+  -webkit-transform: scale(1.08);
+  -moz-transform: scale(1.07);
   cursor: pointer;
 }
 
 .back{
   transform: rotateY( -180deg );
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
   backface-visibility: hidden;
 }
 
 .flip{
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
 
 
@@ -170,6 +180,8 @@ main{
 #start:hover {
   background-color: rgb(143, 143, 150);
   animation: fadein .3s;
+  -moz-animation: fadein .3s;
+  -webkit-animation: fadein .3s;
 }
 
 #start {
