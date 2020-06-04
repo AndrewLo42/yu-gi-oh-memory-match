@@ -103,9 +103,18 @@ main{
   align-content: space-evenly;
 }
 
+.gameRow {
+  height: 33%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .card{
   width: 15%;
-  height: 28%;
+  /* height: 23%; */
+  margin: 3px;
   position: relative;
   background-size: contain;
   transition: transform .6s;
@@ -453,7 +462,7 @@ main{
       display: none;
     }
     .card {
-      height: 20%;
+      /* height: 20%; */
     }
     .modal {
       height: 65%;
@@ -520,8 +529,8 @@ main{
 (max-device-width: 823px) and (orientation: landscape),
 (max-width: 950px) and (orientation: landscape) {
   .card {
-    margin: -30px -1.3px;
-    height: 25%;
+    /* margin: -30px -1.3px; */
+    /* height: 25%; */
   }
 
   aside {
