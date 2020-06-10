@@ -34,16 +34,18 @@ header {
   font-family: Matrix-Bold;
   color: goldenrod;
 }
+
 aside{
   border: 1px solid bisque;
   margin-right: 2%;
-  width: 15%;
-  height: 80vh;
+  /* width: 15%; */
+  /* height: 80vh; */
   text-align: center;
   align-items: center;
-  padding-top: 1%;
+  padding: 1%;
   color: red;
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 aside div {
   display: flex;
@@ -51,12 +53,32 @@ aside div {
   flex-direction: column;
   justify-content: center;
   border: 1px solid bisque;
-  height: 12.5%;
+  /* height: 12.5%; */
   margin: 8% 4%;
   background-color: goldenrod;
   font-family: Matrix-Bold;
   color: black;
 }
+
+  aside{
+    height: 8vh;
+    width: 94%;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+  }
+
+  aside > div {
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 12%;
+    height: 55%;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    margin: 1%;
+    font-size: 1rem;
+    padding: 1%;
+  }
 
 .turnInfo{
   color: goldenrod;
@@ -93,14 +115,15 @@ aside div {
 
 main{
   border: 1px solid bisque;
-  width: 85%;
+  width: 90%;
   height: 80vh;
   display: flex;
-  padding-bottom: 1%;
+  padding: 1%;
   perspective: 600px;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-evenly;
+  margin: auto;
 }
 
 .gameRow {
@@ -323,11 +346,11 @@ main{
   animation: fadeout 0.4s forwards;
   display: none;
 }
-
+/*
 .matches {
   border: none;
   background-color: transparent;
-}
+} */
 
 .concedeContainer {
   padding-top: 2rem;
@@ -439,10 +462,10 @@ main{
       width: 80%
     }
 
-    aside {
+    /* aside {
       width: 15%;
       font-size: 1.2rem;
-    }
+    } */
     .modalTitle {
       font-size: 3.5rem;
     }
@@ -533,7 +556,7 @@ main{
     /* height: 25%; */
   }
 
-  aside {
+  /* aside {
     height: 79vh;
     width: 15%;
     font-size: .9rem;
@@ -542,7 +565,7 @@ main{
   aside div {
     font-size: 1.2rem;
     margin: 6% 4%;
-  }
+  } */
 
   .matches,
   .playerLife,
