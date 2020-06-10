@@ -55,10 +55,12 @@ function setUpCards() {
   var boardSize = { rows: 3, squares: 6 }
   var board = $("main");
   for (var rowIndex = 0; rowIndex < boardSize.rows; rowIndex++) {
+    var gameRow = $('<div>').addClass('gameRow');
     for (var squareIndex = 0; squareIndex < boardSize.squares; squareIndex++) {
       var gameSquare = $('<div>').addClass('card');
-      board.append(prepareCard(gameSquare));
+      gameRow.append(prepareCard(gameSquare))
     }
+    board.append(gameRow);
   }
   turnOnClick();
 }
