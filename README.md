@@ -10,7 +10,7 @@ Users have to match 5 pairs before the Computer player!
 - CSS3
 
 # Live Demo
-Link: http://exodia-exodus.andrewclo.com/
+Link: https://andrewlo42.github.io/yu-gi-oh-memory-match/
 
 # Features
 - Users can click on image cards to begin the memory matching process
